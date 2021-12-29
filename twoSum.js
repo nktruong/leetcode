@@ -41,14 +41,37 @@
 
 var twoSum = function(nums, target) {
     
-    for (let i=0; i<nums.length; i++){
-        for (let j=0; j<nums.length; j++){
-            if((i !== j) && (nums[i] + nums[j] === target)){
-                return [i,j]
-            }
+    // Refactored with Hashmap solution
+    
+    let map = {} // declare object which will be our hashmap
+    
+    // loop: get array value -> find the missing link of pair -> if it exists in map: return the arr || add the value to map
+    for(let i=0; i<nums.length; i++){
+        let currentValue = nums[i]
+        let missingLink = target - currentValue // find the other # that adds up to sum
+        
+        if(map[missingLink] !== undefined){
+            return [map[missingLink], i]
+        } else {
+            map[currentValue] = i // add the value to the hashmap
         }
+        
     }
+    
+    // FIRST LEETCODE and O(N) solution
+    
+    // for (let i=0; i<nums.length; i++){
+    //     for (let j=0; j<nums.length; j++){
+    //         if((i !== j) && (nums[i] + nums[j] === target)){
+    //             return [i,j]
+    //         }
+    //     }
+    // }
 };
+
+console.log(twoSum([2,3,5], 8), [1,2]) // nums[1] = 3. nums[5] = 5. only 3+5 in the array can add up to 8
+console.log(twoSum([1,2,7], 3), [0,1]) // nums[0] = 1. nums[1] = 2. only 1+2 in the array can add up to 3
+console.log(twoSum([6,12,2,65], 71), [0,3]) // nums[0] = 6. nums[3] = 65. only 6+65 in the array can add up to 71
 
 console.log(twoSum([2,3,5], 8), [1,2]) // nums[1] = 3. nums[5] = 5. only 3+5 in the array can add up to 8
 console.log(twoSum([1,2,7], 3), [0,1]) // nums[0] = 1. nums[1] = 2. only 1+2 in the array can add up to 3
